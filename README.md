@@ -19,8 +19,16 @@ powershell -ExecutionPolicy Bypass -File .\scripts\test-skill.ps1
 ```
 
 ### 3. 其他 AI 工具使用方式
-- **Claude Code / Desktop**：直接指向或複製本目錄，設定檔掛載 Obsidian MCP。
-- **Cursor / Windsurf**：放於專案 `.cursor/rules` 或工作區技能目錄，載入 `SKILL.md`。
+- Claude Code / Desktop：直接指向或複製本目錄，設定檔掛載 Obsidian MCP。
+- Cursor / Windsurf：放於專案 `.cursor/rules` 或工作區技能目錄，載入 `SKILL.md`。
+
+---
+
+## 推薦外掛與雙軌讀取架構
+
+為在 Obsidian 中獲得最佳視覺看板體驗，建議搭配以下社群外掛：
+- Dataview 外掛（推薦）：專案地圖與協作任務卡中內嵌 Dataview 查詢代碼塊，能在 Obsidian 前端為人類使用者提供即時動態看板與關聯卡片清單。
+- 雙軌解耦設計：AI 代理人原生讀取純文字 Markdown，無法直接看見 DataviewJS 的動態渲染結果。因此技能採用「專案地圖焦點指針優先、MCP DQL 即時查詢輔助」的雙軌架構。即便未安裝 Dataview 外掛，亦完全不影響 AI 進行筆記讀寫、狀態追蹤與知識治理。
 
 ---
 
