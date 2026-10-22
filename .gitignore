@@ -1,0 +1,16 @@
+# Local and internal development files
+GEMINI.md
+walkthrough.md
+CHANGELOG.md
+docs/
+
+# AI Runtime and temporary logs
+.ai-runtime/
+*.log
+*.tmp
+*.swp
+
+# Operating system files
+Thumbs.db
+Desktop.ini
+.DS_Store
