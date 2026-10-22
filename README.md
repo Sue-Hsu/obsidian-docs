@@ -4,26 +4,6 @@
 
 ---
 
-## 本機快速部署與驗證
-
-### 1. 同步到 Antigravity 全域技能目錄
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\install-global.ps1
-```
-路徑會同步至 `~/.gemini/config/skills/obsidian-docs/`。
-
-### 2. 測試與結構檢查
-每次修改範本或規則後，執行檢查腳本確認格式無誤：
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\test-skill.ps1
-```
-
-### 3. 其他 AI 工具使用方式
-- Claude Code / Desktop：直接指向或複製本目錄，設定檔掛載 Obsidian MCP。
-- Cursor / Windsurf：放於專案 `.cursor/rules` 或工作區技能目錄，載入 `SKILL.md`。
-
----
-
 ## 推薦外掛與雙軌讀取架構
 
 為在 Obsidian 中獲得最佳視覺看板體驗，建議搭配以下社群外掛：
