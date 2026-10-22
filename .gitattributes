@@ -1,0 +1,5 @@
+# Force LF line endings across all platforms
+* text=auto eol=lf
+*.md text eol=lf
+*.ps1 text eol=lf
+*.json text eol=lf
