@@ -58,7 +58,11 @@
 > - 可能原因：Obsidian 應用程式未開啟、MCP Connector 外掛未啟用，或連接埠衝突。
 > - 建議動作：請檢查 Obsidian 中的 Local REST API / MCP Connector 外掛是否處於 Running 狀態。
 >
-> 請問是否需要切換至「本機磁碟直接寫入」備援模式，或待您修復連線後重試？
+### 2.3 Dataview 外掛未安裝或查詢失敗 (dataview_not_installed)
+當調用 DQL 查詢工具回傳 `dataview_not_installed`、`dataview_not_ready` 或 `dataview_query_failed` 時：
+- 根本原因：使用者尚未安裝或啟用 Obsidian Dataview 社群外掛，或索引尚未建置完成。
+- 平滑降級機制：Agent 無需中斷工作流，立即切換為「靜態地圖索引模式」，改為讀取 `10 專案地圖/MAP-<專案名稱>.md` 頂部的 `> [!FOCUS]` 現況焦點指針，並精準存取目標卡片。
+- 選用建議：在交付對話中以簡潔提示告知使用者可按需安裝 Dataview 外掛以獲得前端動態看板體驗。
 
 ---
 

@@ -48,7 +48,7 @@ description: Classify, create, and maintain project notes in Obsidian whenever t
 6. 專案地圖現況焦點指針與 AI 混合互補讀取架構（解決 Dataview 盲區與極省 Token）：
    - 雙軌解耦原則：筆記中保留 Dataview / DataviewJS 語法供人類在 Obsidian 預覽即時看板；AI 代理人則採用「專案地圖焦點指針優先、MCP DQL 查詢輔助」的混合架構，避免逐篇讀取與 Context 浪費。
    - 地圖索引保底（第一防線）：開局盤點或例行了解狀態時，優先讀取 `10 專案地圖/MAP-<專案名稱>.md` 頂部的 `> [!FOCUS]` 現況焦點指針區塊（YAML Properties 下方第一行，標明當前里程碑、進行中工單、斷點與下一步），單檔耗費不到 1,000 tokens 即可掌握全局進度與上下文。
-   - MCP DQL 查詢增強（第二防線）：面對跨目錄關聯、版本比對或多維度篩選統計時，透過 Obsidian MCP 的 `execute_dataview_query` 下達 DQL，由本地 Obsidian 引擎在記憶體中快速檢索並回傳精簡結果（約 100~300 tokens），兼顧即時性與低 Token 消耗。
+   - MCP DQL 查詢增強（第二防線）：面對跨目錄關聯、版本比對或多維度篩選統計時，依當前環境提供的 Obsidian MCP 工具（如 `search_vault` 搭配 `queryType: "dataview"`，或專用 DQL 查詢工具）執行 DQL，由引擎直接回傳過濾後的結構化數據，避免全量讀取實體檔案造成 Context 膨脹。若未安裝外掛回傳 `dataview_not_installed`，自動降級為讀取專案地圖 `> [!FOCUS]` 指針與明確指定的關鍵任務卡/筆記。
    - 當 `60 協作任務/` 工單累積超過 30 篇時，已由 Coordinator 實質驗收結案之工單允許歸檔入 `60 協作任務/已結案/`，保持工作目錄乾淨。
 
 7. 獨立自包含與本專案專屬作業 (Self-Contained & Project-Scoped)：
@@ -190,9 +190,9 @@ description: Classify, create, and maintain project notes in Obsidian whenever t
 ### 步驟四：專用 Obsidian MCP 工具操作與子代理調度守則
 
 1. MCP 優先原則：
-   - 全程透過專用 Obsidian MCP 工具（`list_vault_files`, `get_vault_file`, `create_vault_file`, `update_vault_file` 等）讀寫目標筆記。
+   - 全程透過專用 Obsidian MCP 工具（`list_vault_files`, `get_vault_file`, `create_vault_file`, `patch_vault_file` 等）讀寫目標筆記。
    - MCP 回寫修剪 (Content Sanitization)：呼叫 `get_vault_file` 時外掛系統會在末尾附加 `URI: obsidian://open?...`，在進行回寫或編輯時主動過濾該字尾，確保磁碟中檔案格式乾淨純粹。
-   - MCP Dataview 查詢調用：跨目錄、跨狀態或多維度數據聚合時，優先調用 `execute_dataview_query` 執行 DQL 取得結構化精簡結果，避免逐篇開啟檔案造成 Token 膨脹。
+   - MCP Dataview 查詢調用：跨目錄、跨狀態或多維度數據聚合時，依目前環境提供的工具調用 DQL（例如 Codex 環境使用 `search_vault` 搭配 `queryType: "dataview"`；其他環境依工具清單確認，不假定固定名稱），取得結構化數據。若回傳 `dataview_not_installed`，自動降級為讀取專案地圖現況焦點指針與指定卡片。
 
 2. 連線異常通報：
    - 若 MCP 連線失敗，依 [references/mcp-troubleshooting.md](references/mcp-troubleshooting.md) 指引主動提示使用者檢查 Obsidian 運行狀態。
