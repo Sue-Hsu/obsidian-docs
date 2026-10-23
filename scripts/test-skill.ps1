@@ -76,6 +76,9 @@ if ($mapTemplate -notmatch 'FROM "<專案路徑>/60 協作任務"' -or
     $mapTemplate -match '### 進行中任務') {
     $errors.Add("Project Map must derive task status instead of duplicating a manual board")
 }
+if ($mapTemplate -notmatch '(?s)^---\r?\n.*?\r?\n---\r?\n> \[!FOCUS\]') {
+    $errors.Add("Project Map focus pointer must immediately follow frontmatter")
+}
 if ($generalTemplate -notmatch '(?m)^對應版本:' -or $generalTemplate -notmatch '(?m)^關聯PR:') {
     $errors.Add("Technical document template must support code-version evidence")
 }

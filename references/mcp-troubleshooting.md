@@ -33,6 +33,16 @@
 
 若呼叫 Obsidian MCP 工具時出現異常，Agent 必須立即向使用者發出警告，並依錯誤類型精確通報：
 
+### 2.0 MCP 未連線或未掛載主動通報 (MCP Disconnected / Unmounted)
+當環境尚未掛載 Obsidian MCP，或執行初期偵測到連線不存在時：
+
+> [!WARNING]
+> 偵測到 Obsidian MCP 尚未連線或未掛載
+>
+> 目前無法透過 MCP 與 Obsidian 知識庫連通。
+> - 建議動作：請檢查 Obsidian 應用程式是否開啟，以及 Local REST API / MCP Connector 是否處於 Running 狀態。
+> - 請問是否需要切換至「本機磁碟直接寫入」備援模式，或待您確認 MCP 連線後重試？
+
 ### 2.1 401 Unauthorized 憑證脫鉤通報規範 (Credential Drift)
 當 Server 回傳 HTTP 401 時，表示身分驗證失敗，應明確識別並通報為憑證脫鉤。
 
